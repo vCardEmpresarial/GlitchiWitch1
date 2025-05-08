@@ -6,24 +6,16 @@ require('dotenv').config();
 
 const app = express();
 
-// 🌐 CORS configurado con amor místico
-const corsOptions = {
-  origin: 'https://glitchwitch.onrender.com',
-  methods: ['GET', 'POST', 'OPTIONS'],
-  allowedHeaders: ['Content-Type']
-};
-
-app.use(cors(corsOptions));
-app.options('*', cors(corsOptions)); // 🔮 ¡Respuesta mágica a los preflight!
+//  Permitir todos los orígenes temporalmente
+app.use(cors()); //  ¡Sin restricciones!
+app.options('*', cors()); //  también para preflight
 
 app.use(bodyParser.json());
 
-// 🔑 Inicializa OpenAI
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-// 🧠 Ruta de canalización GPT
 app.post('/api/chat', async (req, res) => {
   const { message } = req.body;
 
@@ -40,9 +32,8 @@ app.post('/api/chat', async (req, res) => {
   }
 });
 
-// 🌌 Activa el servidor
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`🔮 Servidor Glitchy Witch activo en el puerto ${PORT}`);
+  console.log(`🟢 Servidor Glitchy Witch abierto a todos los orígenes en el puerto ${PORT}`);
 });
 
