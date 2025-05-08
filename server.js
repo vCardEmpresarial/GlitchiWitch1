@@ -7,7 +7,9 @@ require('dotenv').config();
 
 const app = express();
 app.use(cors({
-  origin: 'https://glitchwitch.onrender.com'
+  origin: 'https://glitchwitch.onrender.com',
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type']
 }));
 
 app.use(bodyParser.json());
